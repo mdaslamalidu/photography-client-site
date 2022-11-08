@@ -31,7 +31,7 @@ const ServiceCart = ({ service }) => {
               </a>
               <p className="mb-2 text-gray-700">{desc.slice(0, 99) + "...."}</p>
               <Link
-                to={`/details/${_id}`}
+                to={`/services/${_id}`}
                 aria-label=""
                 className="inline-flex items-center font-semibold transition-colors duration-200 text-deep-purple-accent-400 hover:text-deep-purple-800"
               >

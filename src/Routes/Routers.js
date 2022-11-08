@@ -18,7 +18,7 @@ export const routes = createBrowserRouter([
         element: <AllServices></AllServices>,
       },
       {
-        path: "/details/:id",
+        path: "/services/:id",
         element: <Details></Details>,
       },
     ],
