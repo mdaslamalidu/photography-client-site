@@ -1,6 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
+import { useParams } from "react-router-dom";
+import { ContextProvide } from "../../../Context/AuthContext/AuthContext";
 
 const AddReview = () => {
+  const { user } = useContext(ContextProvide);
+  const { id } = useParams();
   const handlePlaceOrder = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -14,17 +18,17 @@ const AddReview = () => {
       email,
       rating,
       message,
-      url
+      url,
+      id,
     };
 
     fetch("http://localhost:5000/review", {
-        method: "POST",
-        headers: {
-            "content-type" : "application/json"
-        },
-        body: JSON.stringify(review)
-    })
-
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(review),
+    });
   };
 
   return (

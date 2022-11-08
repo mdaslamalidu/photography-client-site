@@ -1,7 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { Link } from "react-router-dom";
+import { ContextProvide } from "../../../Context/AuthContext/AuthContext";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { user, logout } = useContext(ContextProvide);
+
+  const handleSignOut = () => {
+    return logout();
+  };
 
   return (
     <div class="bg-gray-900 sticky top-0 z-10">
@@ -34,55 +41,72 @@ const Navbar = () => {
           </a>
           <ul class="flex items-center hidden space-x-8 lg:flex">
             <li>
-              <a
-                href="/"
+              <Link
+                to="/home"
                 aria-label="Our product"
                 title="Our product"
                 class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
               >
-                Product
-              </a>
+                Home
+              </Link>
             </li>
             <li>
-              <a
-                href="/"
+              <Link
+                to="/services"
                 aria-label="Our product"
                 title="Our product"
                 class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
               >
-                Features
-              </a>
+                Services
+              </Link>
             </li>
-            <li>
-              <a
-                href="/"
-                aria-label="Product pricing"
-                title="Product pricing"
-                class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
-              >
-                Pricing
-              </a>
-            </li>
-            <li>
-              <a
-                href="/"
-                aria-label="About us"
-                title="About us"
-                class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
-              >
-                About us
-              </a>
-            </li>
-            <li>
-              <a
-                href="/"
-                class="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
-                aria-label="Sign up"
-                title="Sign up"
-              >
-                Sign up
-              </a>
-            </li>
+
+            {user?.email ? (
+              <>
+                <li>
+                  <Link
+                    href="/"
+                    aria-label="Product pricing"
+                    title="Product pricing"
+                    class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
+                  >
+                    My Review
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/addServices"
+                    aria-label="About us"
+                    title="About us"
+                    class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
+                  >
+                    Add Services
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    onClick={handleSignOut}
+                    href="/"
+                    class="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-purple-400 hover:bg-purple-700 focus:shadow-outline focus:outline-none"
+                    aria-label="Sign up"
+                    title="Sign up"
+                  >
+                    Log Out
+                  </Link>
+                </li>
+              </>
+            ) : (
+              <li>
+                <Link
+                  to="/login"
+                  aria-label="Our product"
+                  title="Our product"
+                  class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-400"
+                >
+                  Log In
+                </Link>
+              </li>
+            )}
           </ul>
           <div class="lg:hidden">
             <button

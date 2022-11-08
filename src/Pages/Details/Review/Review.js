@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 const Review = () => {
   const [review, setReview] = useState([]);
+  const { id } = useParams();
   useEffect(() => {
-    fetch("http://localhost:5000/review")
+    fetch(`http://localhost:5000/review?id=${id}`)
       .then((res) => res.json())
       .then((data) => setReview(data))
       .catch((err) => console.error(err));
