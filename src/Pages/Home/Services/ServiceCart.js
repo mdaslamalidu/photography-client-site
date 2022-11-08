@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const ServiceCart = ({ service }) => {
   const { img, _id, desc, name } = service;
@@ -29,13 +30,13 @@ const ServiceCart = ({ service }) => {
                 {name}
               </a>
               <p className="mb-2 text-gray-700">{desc.slice(0, 99) + "...."}</p>
-              <a
-                href="/"
+              <Link
+                to={`/details/${_id}`}
                 aria-label=""
                 className="inline-flex items-center font-semibold transition-colors duration-200 text-deep-purple-accent-400 hover:text-deep-purple-800"
               >
                 Learn more
-              </a>
+              </Link>
             </div>
           </div>
         </div>

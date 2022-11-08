@@ -19,7 +19,7 @@ const Services = () => {
           <ServiceCart key={service._id} service={service}></ServiceCart>
         ))}
       </div>
-      <Link>
+      <Link to="/services">
         <button>See All</button>
       </Link>
     </div>
