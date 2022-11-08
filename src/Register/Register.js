@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Login = () => {
+const Register = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
   };
@@ -11,7 +11,18 @@ const Login = () => {
       <div className="hero-content my-9 w-2/3 mx-auto">
         <div className="card flex-shrink-0 max-w-sm shadow-2xl bg-base-100 py-8 w-2/3">
           <form onSubmit={handleSubmit} className="card-body">
-            <h1 className="text-3xl font-bold">Login now!</h1>
+            <h1 className="text-3xl font-bold">Registration!</h1>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Name</span>
+              </label>
+              <input
+                type="text"
+                placeholder="Your Name"
+                name="name"
+                className="input input-bordered"
+              />
+            </div>
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Email</span>
@@ -33,20 +44,19 @@ const Login = () => {
                 name="password"
                 className="input input-bordered"
               />
-              <label className="label">
-                <Link className="label-text-alt link link-hover">
-                  Forgot password?
-                </Link>
-              </label>
             </div>
             <div className="form-control mt-6">
-              <input className="btn btn-danger" type="submit" value="Login" />
+              <input
+                className="btn btn-danger"
+                type="submit"
+                value="Register"
+              />
             </div>
           </form>
           <p className="text-center">
-            New to Genius?{" "}
-            <Link className="text-orange-500 font-bold" to="/register">
-              Register
+            Already Have An Account?{" "}
+            <Link className="text-orange-500 font-bold" to="/login">
+              Log in
             </Link>
           </p>
         </div>
@@ -55,4 +65,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;
