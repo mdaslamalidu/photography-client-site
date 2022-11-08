@@ -1,16 +1,29 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { ContextProvide } from "../../../Context/AuthContext/AuthContext";
 
 const Review = () => {
+  const { user } = useContext(ContextProvide);
   const [review, setReview] = useState([]);
   const [refress, setRefress] = useState(false);
   const { id } = useParams();
   useEffect(() => {
     fetch(`http://localhost:5000/review?id=${id}`)
       .then((res) => res.json())
-      .then((data) => setReview(data))
+      .then((data) => {
+        setReview(data);
+        console.log(data);
+      })
       .catch((err) => console.error(err));
   }, [refress]);
+
+  const [serviceDetails, SetServiceDetails] = useState({});
+
+  useEffect(() => {
+    fetch(`http://localhost:5000/serviceDetails/${id}`)
+      .then((res) => res.json())
+      .then((data) => SetServiceDetails(data));
+  }, []);
 
   const handlePlaceOrder = (event) => {
     event.preventDefault();
@@ -27,6 +40,7 @@ const Review = () => {
       message,
       url,
       id,
+      serviceName: serviceDetails.name,
     };
 
     console.log(review);
@@ -111,6 +125,7 @@ const Review = () => {
                 name="email"
                 placeholder="Your Email"
                 className="input input-bordered w-full "
+                defaultValue={user?.email}
               />
               <input
                 type="text"
