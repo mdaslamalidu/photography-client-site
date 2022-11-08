@@ -1,19 +1,57 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 const Review = () => {
   const [review, setReview] = useState([]);
+  const [refress, setRefress] = useState(false);
   const { id } = useParams();
   useEffect(() => {
     fetch(`http://localhost:5000/review?id=${id}`)
       .then((res) => res.json())
       .then((data) => setReview(data))
       .catch((err) => console.error(err));
-  }, []);
+  }, [refress]);
+
+  const handlePlaceOrder = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const name = form.name.value;
+    const rating = form.rating.value;
+    const message = form.message.value;
+    const email = form.email.value;
+    const url = form.url.value;
+    const review = {
+      name,
+      email,
+      rating,
+      message,
+      url,
+      id,
+    };
+
+    console.log(review);
+
+    fetch("http://localhost:5000/review", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(review),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.acknowledged) {
+          setRefress(true);
+        }
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <div className="my-24">
       <h1 className="text-center text-4xl font-bold">My Clients Review</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 w-4/5 mx-auto gap-5 mt-11">
+      <div className="grid grid-cols-1 md:grid-cols-2 w-4/5 mx-auto gap-5 my-11">
         {review.map((rev) => {
           return (
             <div className="bg-slate-500 rounded p-4 text-white">
@@ -51,6 +89,44 @@ const Review = () => {
             </div>
           );
         })}
+      </div>
+      <div>
+        <div className="w-4/5 mx-auto">
+          <form onSubmit={handlePlaceOrder}>
+            <div className="grid gap-3 grid-cols-1 lg:grid-cols-2">
+              <input
+                type="text"
+                name="name"
+                placeholder="Your Name"
+                className="input input-bordered w-full "
+              />
+              <input
+                type="number"
+                name="rating"
+                placeholder="your rating"
+                className="input input-bordered w-full "
+              />
+              <input
+                type="text"
+                name="email"
+                placeholder="Your Email"
+                className="input input-bordered w-full "
+              />
+              <input
+                type="text"
+                name="url"
+                placeholder="your image"
+                className="input input-bordered w-full "
+              />
+            </div>
+            <textarea
+              className="textarea textarea-bordered w-full my-3"
+              name="message"
+              placeholder="Your Message"
+            ></textarea>
+            <input className="btn" type="submit" value="Confirm Your Review" />
+          </form>
+        </div>
       </div>
     </div>
   );

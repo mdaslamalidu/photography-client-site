@@ -14,7 +14,7 @@ export const ContextProvide = createContext();
 const AuthContext = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [refress, setRefress] = useState(false);
+  const [refress, setRefress] = useState(true);
   console.log(user);
   const createUser = (email, password) => {
     setLoading(true);
@@ -37,6 +37,7 @@ const AuthContext = ({ children }) => {
     login,
     logout,
     refress,
+    setRefress,
   };
 
   useEffect(() => {
@@ -44,6 +45,7 @@ const AuthContext = ({ children }) => {
       console.log(currentUser);
       setUser(currentUser);
       setLoading(false);
+      setRefress(true);
     });
 
     return () => unsubscribe;

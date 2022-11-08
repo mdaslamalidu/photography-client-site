@@ -8,7 +8,6 @@ const Details = () => {
     <div>
       <DetailsPage></DetailsPage>
       <Review></Review>
-      <AddReview></AddReview>
     </div>
   );
 };
