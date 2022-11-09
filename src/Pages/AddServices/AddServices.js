@@ -3,6 +3,31 @@ import React from "react";
 const AddServices = () => {
   const handleAddService = (event) => {
     event.preventDefault();
+    const form = event.target;
+    const name = form.name.value;
+    const rating = form.rating.value;
+    const price = form.price.value;
+    const desc = form.desc.value;
+    const img = form.url.value;
+
+    const services = {
+      img,
+      name,
+      rating,
+      desc,
+      price,
+    };
+
+    fetch("http://localhost:5000/services", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(services),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data))
+      .catch((err) => console.error(err));
   };
 
   return (
