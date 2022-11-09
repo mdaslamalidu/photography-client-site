@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import { ContextProvide } from "../Context/AuthContext/AuthContext";
 
 const Register = () => {
-  const { createUser } = useContext(ContextProvide);
+  const { createUser, loading } = useContext(ContextProvide);
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const form = event.target;

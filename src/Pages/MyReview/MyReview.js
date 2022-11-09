@@ -9,11 +9,31 @@ const MyReview = () => {
   useSetTitle("MyReview");
 
   useEffect(() => {
-    fetch(`http://localhost:5000/myReview?email=${user?.email}`)
+    fetch(`http://localhost:5000/myReview?email=${user?.email}`, {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("photoToken")}`,
+      },
+    })
       .then((res) => res.json())
-      .then((data) => setMyreview(data))
+      .then((data) => {
+        setMyreview(data);
+        console.log(data);
+      })
       .catch((err) => console.error(err));
   }, []);
+
+  const handleDetele = (id) => {
+    fetch(`http://localhost:5000/myReview/${id}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.deletedCount) {
+          const filter = myReview.filter((review) => review._id !== id);
+          setMyreview(filter);
+        }
+      });
+  };
 
   return (
     <div>
@@ -27,6 +47,7 @@ const MyReview = () => {
               <MyReviewDetails
                 key={review._id}
                 review={review}
+                handleDetele={handleDetele}
               ></MyReviewDetails>
             ))}
           </div>
