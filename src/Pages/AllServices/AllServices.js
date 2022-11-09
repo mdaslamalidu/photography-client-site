@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
+import useSetTitle from "../../hook/useSetTitle";
 import ServiceCart from "../Home/Services/ServiceCart";
 
 const AllServices = () => {
   const [services, setServices] = useState([]);
-
+  useSetTitle("Services");
   useEffect(() => {
     fetch("http://localhost:5000/allServices")
       .then((res) => res.json())

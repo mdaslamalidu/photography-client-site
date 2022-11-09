@@ -5,3 +5,5 @@ const useSetTitle = (title) => {
     document.title = `${title} - My Photography`;
   }, [title]);
 };
+
+export default useSetTitle;

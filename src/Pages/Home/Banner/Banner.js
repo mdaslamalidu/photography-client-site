@@ -1,7 +1,9 @@
 import React from "react";
 import banner from "../../../assests/banner.jpg";
+import useSetTitle from "../../../hook/useSetTitle";
 
 const Banner = () => {
+  useSetTitle("Home");
   return (
     <div className="relative ">
       <img
