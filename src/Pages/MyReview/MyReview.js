@@ -15,32 +15,25 @@ const MyReview = () => {
 
   return (
     <div>
-      <h3>My Review : {myReview.length}</h3>
-      <div className="overflow-x-auto w-full">
-        <table className="table w-full">
-          <thead>
-            <tr>
-              <th>
-                <label>
-                  <button>Delete</button>
-                </label>
-              </th>
-              <th>UserName</th>
-              <th>ServiceName</th>
-              <th>Message</th>
-              <th>Update</th>
-            </tr>
-          </thead>
-          <tbody>
+      {myReview.length ? (
+        <>
+          <h3 className="text-center mt-8 text-4xl font-bold">
+            My Review : {myReview.length}
+          </h3>
+          <div className="grid grid-cols-1">
             {myReview.map((review) => (
               <MyReviewDetails
-                review={review}
                 key={review._id}
+                review={review}
               ></MyReviewDetails>
             ))}
-          </tbody>
-        </table>
-      </div>
+          </div>
+        </>
+      ) : (
+        <h2 className="text-center mt-8 text-4xl font-bold">
+          There is no review for you
+        </h2>
+      )}
     </div>
   );
 };
