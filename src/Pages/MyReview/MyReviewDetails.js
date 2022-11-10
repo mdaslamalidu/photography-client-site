@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const MyReviewDetails = ({ review, handleDetele }) => {
-  const { name, serviceName, url, message, email, _id } = review;
+  const { serviceName, url, message, _id, rating } = review;
   return (
     <div className="flex items-center w-3/4 mx-auto my-3 p-4 border bg-slate-300 rounded">
       <div className="mr-7">
@@ -12,8 +12,11 @@ const MyReviewDetails = ({ review, handleDetele }) => {
         <h3 className="text-sm font-bold">
           <span className="text-xl font-bold">ServiceName:</span> {serviceName}
         </h3>
-        <h3 className="text-sm font-bold mb-3">
+        <h3 className="text-sm font-bold">
           <span className="text-xl font-bold">MyMessage:</span> {message}
+        </h3>
+        <h3 className="text-sm font-bold mb-3">
+          <span className="text-xl font-bold">Rating:</span> {rating}
         </h3>
 
         {/* The button to open modal */}

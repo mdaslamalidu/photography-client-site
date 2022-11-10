@@ -5,7 +5,7 @@ import useSetTitle from "../../hook/useSetTitle";
 import MyReviewDetails from "./MyReviewDetails";
 
 const MyReview = () => {
-  const { user } = useContext(ContextProvide);
+  const { user, logout } = useContext(ContextProvide);
   const [myReview, setMyreview] = useState([]);
   useSetTitle("MyReview");
 
@@ -18,13 +18,17 @@ const MyReview = () => {
         },
       }
     )
-      .then((res) => res.json())
+      .then((res) => {
+        if (res.status === 401 || res.status === 403) {
+          return logout();
+        }
+        return res.json();
+      })
       .then((data) => {
         setMyreview(data);
-        console.log(data);
       })
       .catch((err) => console.error(err));
-  }, []);
+  }, [user?.email, logout]);
 
   const handleDetele = (id) => {
     fetch(`https://photography-server-murex.vercel.app/myReview/${id}`, {

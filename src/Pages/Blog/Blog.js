@@ -1,6 +1,8 @@
 import React from "react";
+import useSetTitle from "../../hook/useSetTitle";
 
 const Blog = () => {
+  useSetTitle("Blog");
   return (
     <div>
       <h3 className="text-center my-5 text-3xl font-bold">Blog page</h3>

@@ -1,11 +1,12 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ContextProvide } from "../Context/AuthContext/AuthContext";
+import useSetTitle from "../hook/useSetTitle";
 import SocialLogin from "../SocialLogin/SocialLogin";
 
 const Login = () => {
   const { login } = useContext(ContextProvide);
-
+  useSetTitle("login");
   const location = useLocation();
   const navigate = useNavigate();
   const from = location.state?.from?.pathname || "/";
@@ -13,7 +14,6 @@ const Login = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const form = event.target;
-    const name = form.name.value;
     const email = form.email.value;
     const password = form.password.value;
 

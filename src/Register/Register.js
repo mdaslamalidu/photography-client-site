@@ -1,11 +1,12 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { ContextProvide } from "../Context/AuthContext/AuthContext";
+import useSetTitle from "../hook/useSetTitle";
 import SocialLogin from "../SocialLogin/SocialLogin";
 
 const Register = () => {
   const { createUser, updateNameAndUrl } = useContext(ContextProvide);
-
+  useSetTitle("Register");
   const handleSubmit = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -18,6 +19,7 @@ const Register = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
+        form.reset()
         updateNameAndUrl(name, url)
           .then(() => {
             alert("updated");
