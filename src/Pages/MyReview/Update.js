@@ -25,7 +25,7 @@ const Update = () => {
     console.log(review);
 
     fetch(`http://localhost:5000/update/${_id}`, {
-      method: "PUT",
+      method: "PATCH",
       headers: {
         "content-type": "application/json",
       },

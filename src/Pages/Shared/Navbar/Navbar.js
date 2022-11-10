@@ -14,31 +14,16 @@ const Navbar = () => {
     <div class="bg-gray-900 sticky top-0 z-10">
       <div class="px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
         <div class="relative flex items-center justify-between">
-          <a
-            href="/"
+          <Link
+            to="/"
             aria-label="Company"
             title="Company"
             class="inline-flex items-center"
           >
-            <svg
-              class="w-8 text-teal-accent-400"
-              viewBox="0 0 24 24"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeMiterlimit="10"
-              stroke="currentColor"
-              fill="none"
-            >
-              <rect x="3" y="1" width="7" height="12" />
-              <rect x="3" y="17" width="7" height="6" />
-              <rect x="14" y="1" width="7" height="6" />
-              <rect x="14" y="11" width="7" height="12" />
-            </svg>
             <span class="ml-2 text-xl font-bold tracking-wide text-gray-100 uppercase">
-              Company
+              MY PHOTOGRAPHY
             </span>
-          </a>
+          </Link>
           <ul class="flex items-center hidden space-x-8 lg:flex">
             <li>
               <Link
@@ -60,8 +45,18 @@ const Navbar = () => {
                 Services
               </Link>
             </li>
+            <li>
+              <Link
+                to="/blog"
+                aria-label="Our product"
+                title="Our product"
+                class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
+              >
+                Blog
+              </Link>
+            </li>
 
-            {user?.email ? (
+            {user?.uid ? (
               <>
                 <li>
                   <Link
@@ -87,9 +82,9 @@ const Navbar = () => {
                   <Link
                     onClick={handleSignOut}
                     href="/"
-                    class="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-purple-400 hover:bg-purple-700 focus:shadow-outline focus:outline-none"
+                    class="inline-flex items-center justify-center px-6 py-1 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-slate-700 hover:bg-slate-800 focus:shadow-outline focus:outline-none"
                     aria-label="Sign up"
-                    title="Sign up"
+                    title="Log Out"
                   >
                     Log Out
                   </Link>
@@ -135,31 +130,16 @@ const Navbar = () => {
                 <div class="p-5 bg-white border rounded shadow-sm">
                   <div class="flex items-center justify-between mb-4">
                     <div>
-                      <a
-                        href="/"
+                      <Link
+                        to="/"
                         aria-label="Company"
                         title="Company"
                         class="inline-flex items-center"
                       >
-                        <svg
-                          class="w-8 text-deep-purple-accent-400"
-                          viewBox="0 0 24 24"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeMiterlimit="10"
-                          stroke="currentColor"
-                          fill="none"
-                        >
-                          <rect x="3" y="1" width="7" height="12" />
-                          <rect x="3" y="17" width="7" height="6" />
-                          <rect x="14" y="1" width="7" height="6" />
-                          <rect x="14" y="11" width="7" height="12" />
-                        </svg>
                         <span class="ml-2 text-xl font-bold tracking-wide text-gray-800 uppercase">
-                          Company
+                          MY PHOTOGRAPHY
                         </span>
-                      </a>
+                      </Link>
                     </div>
                     <div>
                       <button
@@ -180,55 +160,82 @@ const Navbar = () => {
                   <nav>
                     <ul class="space-y-4">
                       <li>
-                        <a
-                          href="/"
+                        <Link
+                          to="/home"
                           aria-label="Our product"
                           title="Our product"
-                          class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                          class="font-medium tracking-wide text-black transition-colors duration-200 hover:text-teal-accent-400"
                         >
-                          Product
-                        </a>
+                          Home
+                        </Link>
                       </li>
                       <li>
-                        <a
-                          href="/"
+                        <Link
+                          to="/services"
                           aria-label="Our product"
                           title="Our product"
-                          class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                          class="font-medium tracking-wide text-black transition-colors duration-200 hover:text-teal-accent-400"
                         >
-                          Features
-                        </a>
+                          Services
+                        </Link>
                       </li>
                       <li>
-                        <a
-                          href="/"
-                          aria-label="Product pricing"
-                          title="Product pricing"
-                          class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                        <Link
+                          to="/blog"
+                          aria-label="Our product"
+                          title="Our product"
+                          class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
                         >
-                          Pricing
-                        </a>
+                          Blog
+                        </Link>
                       </li>
-                      <li>
-                        <a
-                          href="/"
-                          aria-label="About us"
-                          title="About us"
-                          class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
-                        >
-                          About us
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          href="/"
-                          class="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
-                          aria-label="Sign up"
-                          title="Sign up"
-                        >
-                          Sign up
-                        </a>
-                      </li>
+
+                      {user?.email ? (
+                        <>
+                          <li>
+                            <Link
+                              to="/myReview"
+                              aria-label="Product pricing"
+                              title="Product pricing"
+                              class="font-medium tracking-wide text-black transition-colors duration-200 hover:text-teal-accent-400"
+                            >
+                              My Review
+                            </Link>
+                          </li>
+                          <li>
+                            <Link
+                              to="/addServices"
+                              aria-label="About us"
+                              title="About us"
+                              class="font-medium tracking-wide text-black transition-colors duration-200 hover:text-teal-accent-400"
+                            >
+                              Add Services
+                            </Link>
+                          </li>
+                          <li>
+                            <Link
+                              onClick={handleSignOut}
+                              href="/"
+                              class="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-black transition duration-200 rounded shadow-md bg-purple-400 hover:bg-purple-700 focus:shadow-outline focus:outline-none"
+                              aria-label="Sign up"
+                              title="Sign up"
+                            >
+                              Log Out
+                            </Link>
+                          </li>
+                        </>
+                      ) : (
+                        <li>
+                          <Link
+                            to="/login"
+                            aria-label="Our product"
+                            title="Our product"
+                            class="font-medium tracking-wide text-black transition-colors duration-200 hover:text-teal-400"
+                          >
+                            Log In
+                          </Link>
+                        </li>
+                      )}
                     </ul>
                   </nav>
                 </div>

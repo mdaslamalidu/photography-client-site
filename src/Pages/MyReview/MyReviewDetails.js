@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Update from "./Update";
 
 const MyReviewDetails = ({ review, handleDetele }) => {
   const { name, serviceName, url, message, email, _id } = review;

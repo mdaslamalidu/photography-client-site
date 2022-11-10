@@ -3,7 +3,9 @@ import Main from "../Layout/Main";
 import Login from "../Login/Login";
 import AddServices from "../Pages/AddServices/AddServices";
 import AllServices from "../Pages/AllServices/AllServices";
+import Blog from "../Pages/Blog/Blog";
 import Details from "../Pages/Details/Details/Details";
+import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import Home from "../Pages/Home/Home/Home";
 import MyReview from "../Pages/MyReview/MyReview";
 import Update from "../Pages/MyReview/Update";
@@ -14,6 +16,7 @@ export const routes = createBrowserRouter([
   {
     path: "/",
     element: <Main></Main>,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: "/",
@@ -60,6 +63,10 @@ export const routes = createBrowserRouter([
         element: <Update></Update>,
         loader: ({ params }) =>
           fetch(`http://localhost:5000/update/${params.id}`),
+      },
+      {
+        path: "/blog",
+        element: <Blog></Blog>,
       },
     ],
   },

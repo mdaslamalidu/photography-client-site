@@ -3,9 +3,12 @@ import app from "../../firebase/Firebase.config";
 import {
   createUserWithEmailAndPassword,
   getAuth,
+  GoogleAuthProvider,
   onAuthStateChanged,
   signInWithEmailAndPassword,
+  signInWithPopup,
   signOut,
+  updateProfile,
 } from "firebase/auth";
 
 const auth = getAuth(app);
@@ -14,16 +17,31 @@ export const ContextProvide = createContext();
 const AuthContext = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [refress, setRefress] = useState(true);
-  console.log(user);
+
+  const googleProvider = new GoogleAuthProvider();
+
+  // create account
   const createUser = (email, password) => {
     setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
+  // login
   const login = (email, password) => {
     setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
+  };
+
+  //update profile name and url
+  const updateNameAndUrl = (name, url) => {
+    return updateProfile(auth.currentUser, {
+      displayName: name,
+      photoURL: url,
+    });
+  };
+
+  const googleSignIn = () => {
+    return signInWithPopup(auth, googleProvider);
   };
 
   const logout = () => {
@@ -36,8 +54,8 @@ const AuthContext = ({ children }) => {
     createUser,
     login,
     logout,
-    refress,
-    setRefress,
+    updateNameAndUrl,
+    googleSignIn,
   };
 
   useEffect(() => {
@@ -45,7 +63,6 @@ const AuthContext = ({ children }) => {
       console.log(currentUser);
       setUser(currentUser);
       setLoading(false);
-      setRefress(true);
     });
 
     return () => unsubscribe;

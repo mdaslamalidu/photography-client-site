@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import useSetTitle from "../../hook/useSetTitle";
 import ServiceCart from "../Home/Services/ServiceCart";
+import Spinner from "../Spinner/Spinner";
 
 const AllServices = () => {
   const [loading, setLoading] = useState(false);
@@ -20,10 +21,10 @@ const AllServices = () => {
   console.log(loading);
 
   return (
-    <div>
+    <div className="bg-slate-100 py-10">
       {loading ? (
         <>
-          <h2>My Services</h2>
+          <h2 className="text-center text-3xl font-bold mt-4">My Services</h2>
           <div className="grid gap-8 lg:grid-cols-3 sm:max-w-sm sm:mx-auto lg:max-w-full">
             {services.map((service) => (
               <ServiceCart key={service._id} service={service}></ServiceCart>
@@ -31,7 +32,7 @@ const AllServices = () => {
           </div>
         </>
       ) : (
-        <h2>loading...</h2>
+        <Spinner></Spinner>
       )}
     </div>
   );

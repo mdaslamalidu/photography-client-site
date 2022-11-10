@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import { ContextProvide } from "../../Context/AuthContext/AuthContext";
 import useSetTitle from "../../hook/useSetTitle";
 import MyReviewDetails from "./MyReviewDetails";
@@ -31,12 +32,13 @@ const MyReview = () => {
         if (data.deletedCount) {
           const filter = myReview.filter((review) => review._id !== id);
           setMyreview(filter);
+          toast.success("Successfully Delete");
         }
       });
   };
 
   return (
-    <div>
+    <div className="h-screen">
       {myReview.length ? (
         <>
           <h3 className="text-center mt-8 text-4xl font-bold">

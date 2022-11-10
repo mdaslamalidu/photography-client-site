@@ -1,14 +1,16 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { ContextProvide } from "../Context/AuthContext/AuthContext";
+import SocialLogin from "../SocialLogin/SocialLogin";
 
 const Register = () => {
-  const { createUser, loading } = useContext(ContextProvide);
+  const { createUser, updateNameAndUrl } = useContext(ContextProvide);
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const form = event.target;
     const name = form.name.value;
+    const url = form.url.value;
     const email = form.email.value;
     const password = form.password.value;
 
@@ -16,6 +18,11 @@ const Register = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
+        updateNameAndUrl(name, url)
+          .then(() => {
+            alert("updated");
+          })
+          .catch((err) => console.error(err));
       })
       .catch((err) => console.error(err));
   };
@@ -34,6 +41,17 @@ const Register = () => {
                 type="text"
                 placeholder="Your Name"
                 name="name"
+                className="input input-bordered"
+              />
+            </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Your Photo</span>
+              </label>
+              <input
+                type="text"
+                placeholder="Your Photo URL"
+                name="url"
                 className="input input-bordered"
               />
             </div>
@@ -73,6 +91,7 @@ const Register = () => {
               Log in
             </Link>
           </p>
+          <SocialLogin></SocialLogin>
         </div>
       </div>
     </div>

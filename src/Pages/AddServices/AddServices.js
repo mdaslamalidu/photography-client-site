@@ -1,8 +1,9 @@
 import React from "react";
+import { toast } from "react-toastify";
 import useSetTitle from "../../hook/useSetTitle";
 
 const AddServices = () => {
-    useSetTitle("AddServices")
+  useSetTitle("AddServices");
   const handleAddService = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -28,12 +29,17 @@ const AddServices = () => {
       body: JSON.stringify(services),
     })
       .then((res) => res.json())
-      .then((data) => console.log(data))
+      .then((data) => {
+        if (data.acknowledged) {
+          toast.success("Add your Service");
+          form.reset();
+        }
+      })
       .catch((err) => console.error(err));
   };
 
   return (
-    <div>
+    <div className="h-screen">
       <div className="w-4/5 mx-auto mt-24">
         <h1 className="text-center mb-5 text-4xl font-bold">
           Add Your Service

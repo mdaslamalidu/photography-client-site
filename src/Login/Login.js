@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ContextProvide } from "../Context/AuthContext/AuthContext";
+import SocialLogin from "../SocialLogin/SocialLogin";
 
 const Login = () => {
   const { login } = useContext(ContextProvide);
@@ -23,6 +24,7 @@ const Login = () => {
           email: user.email,
         };
 
+        // jwt token
         fetch("http://localhost:5000/jwt", {
           method: "POST",
           headers: {
@@ -82,6 +84,7 @@ const Login = () => {
               Register
             </Link>
           </p>
+          <SocialLogin></SocialLogin>
         </div>
       </div>
     </div>

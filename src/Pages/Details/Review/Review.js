@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import { ContextProvide } from "../../../Context/AuthContext/AuthContext";
 
 const Review = () => {
@@ -25,7 +26,7 @@ const Review = () => {
       .then((data) => SetServiceDetails(data));
   }, []);
 
-  const handlePlaceOrder = (event) => {
+  const handleAddReview = (event) => {
     event.preventDefault();
     const form = event.target;
     const name = form.name.value;
@@ -41,6 +42,7 @@ const Review = () => {
       url,
       id,
       serviceName: serviceDetails.name,
+      date: new Date().getHours(),
     };
 
     console.log(review);
@@ -57,6 +59,8 @@ const Review = () => {
         console.log(data);
         if (data.acknowledged) {
           setRefress(true);
+          toast.success("Thanks For your Review");
+          form.reset();
         }
       })
       .catch((err) => console.log(err));
@@ -65,12 +69,12 @@ const Review = () => {
   return (
     <div className="my-24">
       <h1 className="text-center text-4xl font-bold">My Clients Review</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 w-4/5 mx-auto gap-5 my-11">
+      <div className="grid grid-cols-1 w-4/5 mx-auto gap-5 my-11">
         {review.map((rev) => {
           return (
             <div className="bg-slate-500 rounded p-4 text-white">
               <div className="flex justify-between mb-4">
-                <div className="flex space-x-4">
+                <div className="flex items-center space-x-4">
                   <div>
                     <img
                       src={rev.url}
@@ -80,9 +84,6 @@ const Review = () => {
                   </div>
                   <div>
                     <h4 className="font-bold">{rev.name}</h4>
-                    <span className="text-xs dark:text-gray-400">
-                      2 days ago
-                    </span>
                   </div>
                 </div>
                 <div className="flex items-center space-x-2 dark:text-yellow-500">
@@ -98,51 +99,75 @@ const Review = () => {
               </div>
               <hr />
               <div className="p-4 space-y-2 text-sm dark:text-gray-400">
-                <p>{rev.message}</p>
+                <p>Message: {rev.message}</p>
               </div>
             </div>
           );
         })}
       </div>
-      <div>
-        <div className="w-4/5 mx-auto">
-          <form onSubmit={handlePlaceOrder}>
-            <div className="grid gap-3 grid-cols-1 lg:grid-cols-2">
-              <input
-                type="text"
-                name="name"
-                placeholder="Your Name"
-                className="input input-bordered w-full "
-              />
-              <input
-                type="number"
-                name="rating"
-                placeholder="your rating"
-                className="input input-bordered w-full "
-              />
-              <input
-                type="text"
-                name="email"
-                placeholder="Your Email"
-                className="input input-bordered w-full "
-                defaultValue={user?.email}
-              />
-              <input
-                type="text"
-                name="url"
-                placeholder="your image"
-                className="input input-bordered w-full "
-              />
+      {user?.email ? (
+        <>
+          <div>
+            <h2 className="my-5 text-3xl font-bold text-center">
+              Add Your Comment
+            </h2>
+            <div className="w-4/5 mx-auto">
+              <form onSubmit={handleAddReview}>
+                <div className="grid gap-3 grid-cols-1 lg:grid-cols-2">
+                  <input
+                    type="text"
+                    name="name"
+                    placeholder="Your Name"
+                    className="input input-bordered w-full"
+                    defaultValue={user?.displayName}
+                    readOnly
+                  />
+                  <input
+                    type="number"
+                    name="rating"
+                    placeholder="your rating"
+                    className="input input-bordered w-full "
+                  />
+                  <input
+                    type="text"
+                    name="email"
+                    placeholder="Your Email"
+                    className="input input-bordered w-full "
+                    defaultValue={user?.email}
+                    readOnly
+                  />
+                  <input
+                    type="text"
+                    name="url"
+                    placeholder="your image"
+                    className="input input-bordered w-full"
+                    defaultValue={user?.photoURL}
+                    readOnly
+                  />
+                </div>
+                <textarea
+                  className="textarea textarea-bordered w-full my-3"
+                  name="message"
+                  placeholder="Your Message"
+                ></textarea>
+                <input
+                  className="btn"
+                  type="submit"
+                  value="Confirm Your Review"
+                />
+              </form>
             </div>
-            <textarea
-              className="textarea textarea-bordered w-full my-3"
-              name="message"
-              placeholder="Your Message"
-            ></textarea>
-            <input className="btn" type="submit" value="Confirm Your Review" />
-          </form>
-        </div>
-      </div>
+          </div>
+        </>
+      ) : (
+        <h2 className="text-3xl text-center font-bold">
+          Please Login to add Your Review, Go to{" "}
+          <button className="bg-slate-500 text-white rounded text-2xl py-0 px-5 mr-3">
+            <Link to="/login">Log In</Link>{" "}
+          </button>
+          page
+        </h2>
+      )}
     </div>
   );
 };
