@@ -25,7 +25,7 @@ const MyReview = () => {
         return res.json();
       })
       .then((data) => {
-        setMyreview(data.reverse());
+        setMyreview(data);
       })
       .catch((err) => console.error(err));
   }, [user?.email, logout]);

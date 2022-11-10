@@ -14,10 +14,10 @@ const Review = () => {
     fetch(`https://photography-server-murex.vercel.app/review?id=${id}`)
       .then((res) => res.json())
       .then((data) => {
-        setReview(data.reverse());
+        setReview(data);
       })
       .catch((err) => console.error(err));
-  }, [refress]);
+  }, [refress, id]);
 
   const handleAddReview = (event) => {
     event.preventDefault();
