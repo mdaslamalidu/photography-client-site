@@ -7,7 +7,7 @@ const DetailsPage = () => {
   const [serviceDetails, SetServiceDetails] = useState({});
   useSetTitle("ServiceDetails");
   useEffect(() => {
-    fetch(`http://localhost:5000/serviceDetails/${id}`)
+    fetch(`https://photography-server-murex.vercel.app/serviceDetails/${id}`)
       .then((res) => res.json())
       .then((data) => SetServiceDetails(data));
   }, []);
@@ -33,25 +33,21 @@ const DetailsPage = () => {
               type="radio"
               name="rating-5"
               className="mask mask-star-2 bg-orange-400"
-              checked
             />
             <input
               type="radio"
               name="rating-5"
               className="mask mask-star-2 bg-orange-400"
-              checked
             />
             <input
               type="radio"
               name="rating-5"
               className="mask mask-star-2 bg-orange-400"
-              checked
             />
             <input
               type="radio"
               name="rating-5"
               className="mask mask-star-2 bg-orange-400"
-              checked
             />
           </span>
         </p>

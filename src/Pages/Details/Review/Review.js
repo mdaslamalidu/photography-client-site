@@ -1,15 +1,17 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useLoaderData, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { ContextProvide } from "../../../Context/AuthContext/AuthContext";
 
 const Review = () => {
+  const serviceData = useLoaderData();
+  console.log(serviceData);
   const { user } = useContext(ContextProvide);
   const [review, setReview] = useState([]);
   const [refress, setRefress] = useState(false);
   const { id } = useParams();
   useEffect(() => {
-    fetch(`http://localhost:5000/review?id=${id}`)
+    fetch(`https://photography-server-murex.vercel.app/review?id=${id}`)
       .then((res) => res.json())
       .then((data) => {
         setReview(data);
@@ -17,14 +19,6 @@ const Review = () => {
       })
       .catch((err) => console.error(err));
   }, [refress]);
-
-  const [serviceDetails, SetServiceDetails] = useState({});
-
-  useEffect(() => {
-    fetch(`http://localhost:5000/serviceDetails/${id}`)
-      .then((res) => res.json())
-      .then((data) => SetServiceDetails(data));
-  }, []);
 
   const handleAddReview = (event) => {
     event.preventDefault();
@@ -41,13 +35,13 @@ const Review = () => {
       message,
       url,
       id,
-      serviceName: serviceDetails.name,
+      serviceName: serviceData.name,
       date: new Date().getHours(),
     };
 
     console.log(review);
 
-    fetch("http://localhost:5000/review", {
+    fetch("https://photography-server-murex.vercel.app/review", {
       method: "POST",
       headers: {
         "content-type": "application/json",

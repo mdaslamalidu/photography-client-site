@@ -33,6 +33,10 @@ export const routes = createBrowserRouter([
       {
         path: "/services/:id",
         element: <Details></Details>,
+        loader: ({ params }) =>
+          fetch(
+            `https://photography-server-murex.vercel.app/serviceDetails/${params.id}`
+          ),
       },
       {
         path: "/login",
@@ -62,7 +66,9 @@ export const routes = createBrowserRouter([
         path: "/update/:id",
         element: <Update></Update>,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/update/${params.id}`),
+          fetch(
+            `https://photography-server-murex.vercel.app/update/${params.id}`
+          ),
       },
       {
         path: "/blog",

@@ -10,11 +10,14 @@ const MyReview = () => {
   useSetTitle("MyReview");
 
   useEffect(() => {
-    fetch(`http://localhost:5000/myReview?email=${user?.email}`, {
-      headers: {
-        authorization: `Bearer ${localStorage.getItem("photoToken")}`,
-      },
-    })
+    fetch(
+      `https://photography-server-murex.vercel.app/myReview?email=${user?.email}`,
+      {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("photoToken")}`,
+        },
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         setMyreview(data);
@@ -24,7 +27,7 @@ const MyReview = () => {
   }, []);
 
   const handleDetele = (id) => {
-    fetch(`http://localhost:5000/myReview/${id}`, {
+    fetch(`https://photography-server-murex.vercel.app/myReview/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())

@@ -9,16 +9,14 @@ const AllServices = () => {
 
   useSetTitle("Services");
   useEffect(() => {
-    fetch("http://localhost:5000/allServices")
+    fetch("https://photography-server-murex.vercel.app/allServices")
       .then((res) => res.json())
       .then((data) => {
         setServices(data);
-        console.log(loading);
         setLoading(true);
       })
       .catch((err) => console.error(err));
   }, []);
-  console.log(loading);
 
   return (
     <div className="bg-slate-100 py-10">

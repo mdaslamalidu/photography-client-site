@@ -4,7 +4,7 @@ import { useLoaderData } from "react-router-dom";
 const Update = () => {
   const review = useLoaderData();
   const { name, url, rating, email, message, id, serviceName, _id } = review;
-
+  console.log(review);
   const handleUpdateReview = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -13,6 +13,7 @@ const Update = () => {
     const message = form.message.value;
     const url = form.url.value;
     const rating = form.rating.value;
+    const serviceName = form.serviceName.value;
     const review = {
       name,
       email,
@@ -24,7 +25,7 @@ const Update = () => {
     };
     console.log(review);
 
-    fetch(`http://localhost:5000/update/${_id}`, {
+    fetch(`https://photography-server-murex.vercel.app/update/${_id}`, {
       method: "PATCH",
       headers: {
         "content-type": "application/json",
@@ -38,7 +39,7 @@ const Update = () => {
   };
 
   return (
-    <div>
+    <div className="h-screen">
       <div className="w-4/5 mx-auto mt-12">
         <form onSubmit={handleUpdateReview}>
           <div className="grid gap-3 grid-cols-1 lg:grid-cols-2">
@@ -48,6 +49,13 @@ const Update = () => {
               placeholder="Your Name"
               className="input input-bordered w-full "
               defaultValue={name}
+            />
+            <input
+              type="text"
+              name="serviceName"
+              placeholder="Service Name"
+              className="input input-bordered w-full "
+              defaultValue={serviceName}
             />
             <input
               type="number"
