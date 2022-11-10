@@ -25,7 +25,7 @@ const MyReview = () => {
         return res.json();
       })
       .then((data) => {
-        setMyreview(data);
+        setMyreview(data.reverse());
       })
       .catch((err) => console.error(err));
   }, [user?.email, logout]);
@@ -45,27 +45,29 @@ const MyReview = () => {
   };
 
   return (
-    <div className="h-screen">
-      {myReview.length ? (
-        <>
-          <h3 className="text-center mt-8 text-4xl font-bold">
-            My Review : {myReview.length}
-          </h3>
-          <div className="grid grid-cols-1">
-            {myReview.map((review) => (
-              <MyReviewDetails
-                key={review._id}
-                review={review}
-                handleDetele={handleDetele}
-              ></MyReviewDetails>
-            ))}
-          </div>
-        </>
-      ) : (
-        <h2 className="text-center mt-8 text-4xl font-bold">
-          There is no review for you
-        </h2>
-      )}
+    <div className="h-auto">
+      <div>
+        {myReview.length ? (
+          <>
+            <h3 className="text-center mt-8 text-4xl font-bold">
+              My Review : {myReview.length}
+            </h3>
+            <div className="grid grid-cols-1">
+              {myReview.map((review) => (
+                <MyReviewDetails
+                  key={review._id}
+                  review={review}
+                  handleDetele={handleDetele}
+                ></MyReviewDetails>
+              ))}
+            </div>
+          </>
+        ) : (
+          <h2 className="text-center mt-8 text-4xl font-bold">
+            There is no review for you
+          </h2>
+        )}
+      </div>
     </div>
   );
 };

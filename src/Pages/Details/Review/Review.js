@@ -14,8 +14,7 @@ const Review = () => {
     fetch(`https://photography-server-murex.vercel.app/review?id=${id}`)
       .then((res) => res.json())
       .then((data) => {
-        setReview(data);
-        console.log(data);
+        setReview(data.reverse());
       })
       .catch((err) => console.error(err));
   }, [refress]);
@@ -36,7 +35,7 @@ const Review = () => {
       url,
       id,
       serviceName: serviceData.name,
-      date: new Date().getHours(),
+      date: new Date(),
     };
 
     console.log(review);
