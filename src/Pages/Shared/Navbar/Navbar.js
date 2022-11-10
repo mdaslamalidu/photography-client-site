@@ -184,7 +184,7 @@ const Navbar = () => {
                           to="/blog"
                           aria-label="Our product"
                           title="Our product"
-                          className="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
+                          className="font-medium tracking-wide text-black  transition-colors duration-200 hover:text-teal-accent-400"
                         >
                           Blog
                         </Link>
