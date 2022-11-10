@@ -25,7 +25,7 @@ const Banner = () => {
         <div className="relative px-4 py-16 mx-auto overflow-hidden sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
           <div className="flex flex-col items-center justify-between xl:flex-row">
             <div className="w-full max-w-xl mb-12 xl:mb-0 xl:pr-16 xl:w-7/12">
-              <h2 className="max-w-lg mb-6 font-sans text-8xl text-white font-bold tracking-tight  sm:text-2xl sm:leading-none">
+              <h2 className="max-w-lg mb-6 font-sans md:text-6xl text-white font-bold tracking-tight  text-4xl sm:leading-none">
                 Welcome To My <br className="hidden md:block" />
                 Photography Studio
               </h2>
