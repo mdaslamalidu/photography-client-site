@@ -5,46 +5,46 @@ import useSetTitle from "../hook/useSetTitle";
 import SocialLogin from "../SocialLogin/SocialLogin";
 
 const Login = () => {
-  // const { login } = useContext(ContextProvide);
-  // useSetTitle("login");
-  // const location = useLocation();
-  // const navigate = useNavigate();
-  // const from = location.state?.from?.pathname || "/";
+  const { login } = useContext(ContextProvide);
+  useSetTitle("login");
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from = location.state?.from?.pathname || "/";
 
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   const form = event.target;
-  //   const email = form.email.value;
-  //   const password = form.password.value;
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const email = form.email.value;
+    const password = form.password.value;
 
-  //   login(email, password)
-  //     .then((result) => {
-  //       const user = result.user;
-  //       const currentUser = {
-  //         email: user.email,
-  //       };
+    login(email, password)
+      .then((result) => {
+        const user = result.user;
+        const currentUser = {
+          email: user.email,
+        };
 
-  //       // jwt token
-  //       fetch("https://photography-server-murex.vercel.app/jwt", {
-  //         method: "POST",
-  //         headers: {
-  //           "content-type": "application/json",
-  //         },
-  //         body: JSON.stringify(currentUser),
-  //       })
-  //         .then((res) => res.json())
-  //         .then((data) => {
-  //           localStorage.setItem("photoToken", data.token);
-  //           navigate(from, { replace: true });
-  //         });
-  //     })
-  //     .catch((err) => console.error(err));
-  // };
+        // jwt token
+        fetch("https://photography-server-murex.vercel.app/jwt", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(currentUser),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            localStorage.setItem("photoToken", data.token);
+            navigate(from, { replace: true });
+          });
+      })
+      .catch((err) => console.error(err));
+  };
 
   return (
     <div className="hero">
       <h2>Hello</h2>
-      {/* <div className="hero-content my-9 w-full md:w-2/3 mx-auto">
+      <div className="hero-content my-9 w-full md:w-2/3 mx-auto">
         <div className="card flex-shrink-0 max-w-sm shadow-2xl bg-base-100 py-8  w-full md:w-2/3">
           <form onSubmit={handleSubmit} className="card-body">
             <h1 className="text-3xl font-bold">Login now!</h1>
@@ -87,7 +87,7 @@ const Login = () => {
           </p>
           <SocialLogin></SocialLogin>
         </div>
-      </div> */}
+      </div>
     </div>
   );
 };
